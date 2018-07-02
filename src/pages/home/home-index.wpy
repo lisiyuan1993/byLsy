@@ -1,0 +1,20 @@
+<style lang="less" src="./home-index.less">
+</style>
+
+<template>
+  44444444
+</template>
+
+<script>
+  import {
+    wepy
+  } from '@cdn/utils/header.js';
+  let data = {};
+  export default class HomeIndex extends wepy.page {
+    data = JSON.parse(JSON.stringify(data));
+    config = {
+      navigationBarTitleText: '首页'
+    };
+    components = {};
+    onLoad() {}
+</script>

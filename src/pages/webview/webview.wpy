@@ -1,0 +1,25 @@
+<style lang="less">
+</style>
+
+<template>
+  <web-view wx:if="{{canIUse && webviewUrl}}" src="{{webviewUrl}}"></web-view>
+</template>
+
+<script>
+  import { wepy, store, constants } from '@cdn/utils/header.js';
+  export default class modeitem extends wepy.page {
+    props = {
+      item: Object
+    };
+    data = {
+        canIUse: wepy.canIUse('web-view'),
+        webviewUrl: ''
+    }
+    methods={
+    }
+    onLoad() {
+      let url = store.get(constants.WEBVIEWURL)
+      this.webviewUrl = url;
+    }
+  }
+</script>

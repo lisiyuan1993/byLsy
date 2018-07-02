@@ -1,0 +1,23 @@
+<style lang="less" src="./homePage.less">
+</style>
+
+<template>
+  <view class="homePage-container">
+    111111
+  </view>
+</template>
+
+<script>
+import { wepy } from '@cdn/utils/header.js';
+
+let data = {};
+export default class homePage extends wepy.page {
+  components = {};
+  data = JSON.parse(JSON.stringify(data));
+  config = {
+    navigationBarTitleText: '首页'
+  };
+  methods = {};
+  onLoad() {}
+}
+</script>

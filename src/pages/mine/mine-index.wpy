@@ -1,0 +1,23 @@
+<style lang="less" src="./mine-index.less">
+</style>
+
+<template>
+  <view class="mine-container">
+    4445665
+  </view>
+</template>
+
+<script>
+import { wepy } from '@cdn/utils/header.js';
+
+let data = {};
+export default class mineIndex extends wepy.page {
+  components = {};
+  data = JSON.parse(JSON.stringify(data));
+  config = {
+    navigationBarTitleText: '我的'
+  };
+  methods = {}
+  onLoad() {}
+}
+</script>

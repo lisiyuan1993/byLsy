@@ -1,0 +1,132 @@
+<style lang="less" src="./styles/iconfont.less">
+
+</style>
+<style lang="less" src="./styles/basic.less">
+
+</style>
+<script>
+  /* eslint-disable */
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+  import {
+    setStore
+  } from 'wepy-redux';
+  import configStore from './store';
+  import utils from '@cdn/utils';
+  const updateManager = wx.getUpdateManager();
+  const store = configStore();
+  setStore(store);
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/home/homePage',
+        'pages/mine/mine-index'
+      ],
+      window: {
+        navigationBarBackgroundColor: '#fff',
+        navigationBarTextStyle: 'black',
+        backgroundColor: '#f8f8f8',
+        backgroundTextStyle: 'dark'
+      },
+      tabBar: {
+        color: '#A8A8A8',
+        selectedColor: '#101010',
+        borderStyle: 'white',
+        backgroundColor: '#fff',
+        list: [{
+            selectedIconPath: "assets/images/home-seleted.png",
+            iconPath: "assets/images/home.png",
+            pagePath: 'pages/home/homePage',
+            text: '首页'
+          },
+          {
+            selectedIconPath: "assets/images/mine-seleted.png",
+            iconPath: "assets/images/mine.png",
+            pagePath: 'pages/mine/mine-index',
+            text: '我的'
+          }
+        ]
+      },
+      debug: false
+    };
+    globalData = {
+      userInfo: null
+    };
+    constructor() {
+      super();
+      // 开启promise
+      this.use('promisify');
+      this.use('requestfix');
+      this.intercept('request', {
+        config(p) {
+          return p;
+        },
+        success(p) {
+          if (
+            p.data.status &&
+            +p.data.status !== 1 &&
+            (+p.data.errorCode === 10000 || p.data.errorCode === '04')
+          ) {
+            utils.sleep(utils.sleepTime * 3).then(function() {
+              let redirectUrl = ''
+              let page = getCurrentPages();
+              let route = page[page.length - 1].route;
+              let options = page[page.length - 1].options;
+              if (utils.isEmptyObject(options)) {
+                redirectUrl = '/' + route
+              } else {
+                var str = '';
+                for (const key in options) {
+                  if (options.hasOwnProperty(key)) {
+                    const element = options[key];
+                    str += key + '=' + element + '&'
+                  }
+                }
+                str = str.substring(0, str.length - 1)
+                redirectUrl = encodeURIComponent('/' + route + '?' + str);
+              }
+              if (route.indexOf('mine-index')>-1) {
+                 wepy.redirectTo({
+                  url: '/pages/login/login?redirect=' + redirectUrl
+                });
+              } else {
+                wepy.navigateTo({
+                  url: '/pages/login/login?redirect=' + redirectUrl
+                });
+              }
+            });
+          }
+          return p;
+        },
+        fail(p) {
+          return p;
+        },
+        complete(p) {
+        }
+      });
+    }
+    onLaunch() {
+      updateManager.onCheckForUpdate(function(res) {
+        // 请求完新版本信息的回调
+        // console.log(res.hasUpdate);
+      });
+      updateManager.onUpdateReady(function() {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function(res) {
+            if (res.confirm) {
+              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              updateManager.applyUpdate();
+            }
+          }
+        });
+      });
+      updateManager.onUpdateFailed(function() {
+        // 新的版本下载失败
+        // console.log('新版本下载失败');
+      });
+    }
+  }
+  /* eslint-enable */
+</script>

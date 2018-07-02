@@ -1,0 +1,79 @@
+@charset "utf-8";
+@import './color.less';
+  page, view, text, input, button{
+    font-family: "PingFangSC", "微软雅黑", "宋体", "华文细黑", arial, sans-serif;
+  }
+  page {
+    height: 100%;
+    background: #fff;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  .zan-loadmore--nomore .zan-loadmore__tips {
+    background: #f8f8f8 !important;
+  }
+  // text{
+  //   font-size: 50rpx;
+  // }
+  .hide {
+    display: none!important;
+  }
+  .show {
+    display: block!important;
+  }
+
+  .cardton-title{
+    font-size:32rpx;
+    color:rgba(17, 17, 17, 1);
+    font-weight:bold;
+    line-height:44rpx;
+    margin-bottom:28rpx;
+    &::before{
+        content: '';
+        display: inline-block;
+        width: 8rpx;
+        height: 28rpx;
+        border-radius: 3rpx;
+        background: #333;
+        padding-top: 4rpx;
+        position: relative;
+        top: 4rpx;
+        margin-right: 18rpx;
+      }
+}
+
+.home-btn{
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 16rpx 30rpx;
+  z-index: 1000;
+  background: #fff;
+  box-shadow:0px -10px 12px 0px rgba(0,0,0,0.04);
+  button.buycard {
+      box-sizing: border-box;
+      height: 84rpx;
+      line-height: 84rpx;
+      border-radius: 4rpx;
+      background: linear-gradient(rgba(221, 183, 113, 1), rgba(208, 170, 94, 1));
+      font-size: 32rpx;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+      text-align: center;
+      border: 0;
+      padding: 0 !important;
+  }
+  button.buycard[disabled] {
+    background:linear-gradient(-119.9deg,rgba(196,196,196,1),rgba(221,222,223,1));
+  }
+}
+
+.zan-loadmore--nomore .zan-loadmore__tips {
+  background:#fff !important;
+}

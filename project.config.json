@@ -1,0 +1,17 @@
+{
+	"description": "小程序大作战",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"production-appid": "wxe88a6bcdeb0ecc46",
+	"test-appid": "wxe88a6bcdeb0ecc46",
+	"appid": "wxe88a6bcdeb0ecc46",
+	"projectname": "byLsy",
+	"miniprogramRoot": "./dist",
+	"condition": {}
+}
